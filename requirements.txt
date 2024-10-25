@@ -2,3 +2,7 @@
 # python -m venv .venv
 # .venv\Scripts\Activate.ps1
 # pip install -r requirements.txt
+requests==2.*
+PyYAML==6.*
+lxml==4.*
+Pygments==2.*
