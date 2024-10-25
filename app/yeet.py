@@ -1,4 +1,6 @@
 import json
+
+
 import sys
 from collections import namedtuple
 
@@ -11,6 +13,8 @@ from app.writer import write
 from app import colorizer
 
 
+# This module provides the `Yeeter` class which handles HTTP requests and formats the response
+# based on the content type. It supports colorizing and formatting JSON, XML, and HTML responses.
 class Yeeter:
     Visual = namedtuple("Visual", ["formatter", "colorizer"])
 
@@ -36,6 +40,7 @@ class Yeeter:
                 formatter_fn, colorizer_fn
             )
 
+    # Sends an HTTP request based on the provided file and processes the response.
     def yeet(self, request_filepath):
         request_data: dict = read_request_file(request_filepath)
         response: Response = request(**request_data)
@@ -70,6 +75,7 @@ class Yeeter:
         else:
             write(response.content, sys.stdout.buffer, formatter=None, colorizer=None)
 
+    # Extracts and returns the content type from the HTTP response.
     @staticmethod
     def _get_content_type(res: Response) -> str:
         content_type, *_ = res.headers["content-type"].split(";")

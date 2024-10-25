@@ -1,6 +1,6 @@
 import argparse
 
-from quaeso.yeet import Yeeter
+from app.yeet import Yeeter
 
 
 def main():
