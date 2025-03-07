@@ -4,7 +4,7 @@
 
 Termino-logistic is a powerful command-line interface (CLI) tool written in Python that allows users to send HTTP requests effortlessly. It is designed to streamline API interactions by supporting request configurations via YAML and JSON files. With Termino-logistic, users can execute various HTTP methods, manage request headers, send query parameters, and handle responses with ease. This tool is ideal for developers and testers who frequently interact with APIs and require a lightweight yet flexible solution.
 
-## How to Use
+## How to use
 
 Use the terminal first follow the steps and the `setup.py` file to build this project. Then run the tool by running `termino --help` in the terminal.
 
@@ -54,6 +54,62 @@ method: GET
 ```
 
 **By running the command** `termino -f myrequest.yml > book.pdf`.
+
+### A full example file `myrequest.yml`
+
+```yml
+method: XXX # (REQUIRED) GET, OPTIONS, HEAD, POST, PUT, PATCH, or DELETE
+url: XXX # (REQUIRED) must be prefixed with http:// or https://
+
+params: # url query parameters. have as many as you like
+  offset: 0
+  limit: 10
+
+data: # data for POST
+  name: john
+  age: 22
+  hobbies:
+    - running
+    - eating
+    - sleeping
+
+data: # you can also type data in json format instead of yaml
+  {
+    "name": "ash",
+    "age": 10,
+    "hobbies": ["catching pokemons", "eating", "travelling"]
+  }
+
+headers: # have as many as you like
+  Content-Type: application/json
+  Authorization: <Bearer Token>
+
+
+cookies: # have as many as you like
+  mycookie: <Cookie Value>
+  myothercookie: <Other Cookie Value>
+
+timeout: 3.14 # seconds
+
+allow_redirects: true # true or false
+
+proxies: # have as many as you like
+  http: http://10.10.1.10:3128
+  https: https://10.10.1.11:1080
+  ftp: ftp://10.10.1.10:3128
+
+# EITHER verify server's TLS certificate. true or false
+verify: true
+# OR path to a CA bundle to use
+verify: some/folder/cacert.crt
+
+# EITHER path to single ssl client cert file (*.pem)
+cert: some/folder/client.pem
+# OR (*.cert), (*.key) pair.
+cert:
+  - some/folder/client.cert
+  - some/folder/client.key
+```
 
 ## How to Set Up the Project
 
@@ -185,11 +241,11 @@ setup(
 
 ---
 
-## How to Contribute to This Project
+## How to contribute to this project
 
 We welcome contributions to Termino-logistic! Here are some ways you can help improve this project:
 
-### How You Can Improve the Project
+### How you can improve the project
 
 1. **Bug fixes**: Find and fix bugs in the existing codebase
 2. **Feature enhancements**: Add new features or enhance existing ones
@@ -197,19 +253,44 @@ We welcome contributions to Termino-logistic! Here are some ways you can help im
 4. **Code refactoring**: Improve code structure and maintainability
 5. **Cross-platform compatibility**: Ensure the tool works well across different operating systems
 
-### How to Contribute by Writing Test Cases
+### How to contribute by writing test cases
 
 1. Add test cases for existing functionality in the `tests/` directory
 2. Ensure your test cases cover both expected behavior and edge cases
 3. Make sure tests are clear, well-documented, and follow the existing testing pattern
 4. Run the test suite before submitting your contribution to ensure nothing breaks
 
-### How to Contribute by Writing Docs
+### How to contribute by writing docs
 
 1. Improve existing documentation for clarity and completeness
 2. Add documentation for new features or undocumented functionality
 3. Create tutorials or usage examples that showcase the tool's capabilities
 4. Fix typos, grammar issues, or formatting problems in existing documentation
+
+### Important notes
+
+- **Do not update the README.md file** directly without prior approval
+- If any configuration file needs to be updated, please message the maintainer on Discord first
+
+### How to raise an issue
+
+1. Before creating a new issue, check if a similar issue already exists
+2. Use the provided issue template to provide all necessary information
+3. Be specific about the problem, including steps to reproduce, expected behavior, and actual behavior
+4. Include version information (OS, Python version, package version)
+5. Add relevant logs, screenshots, or error messages
+
+### How to submit a pull request
+
+1. Fork the repository and create a new branch for your feature or bugfix
+2. Implement your changes following the project's coding style
+3. Add or update tests as necessary
+4. Ensure all tests pass before submitting
+5. Use the provided pull request template
+6. Link any related issues in your pull request description
+7. Be responsive to feedback and be prepared to make requested changes
+
+Thank you for considering contributing to Termino-logistic!
 
 ### Branch Naming Convention
 
