@@ -16,6 +16,22 @@ from app import colorizer
 # This module provides the `Yeeter` class which handles HTTP requests and formats the response
 # based on the content type. It supports colorizing and formatting JSON, XML, and HTML responses.
 class Yeeter:
+    """
+    A class to handle HTTP requests and process responses with optional colorization and formatting.
+    Attributes:
+        Visual (namedtuple): A named tuple to store formatter and colorizer functions.
+        colorize_stdout (bool): Indicates if stdout should be colorized.
+        colorize_stderr (bool): Indicates if stderr should be colorized.
+        content_type_visual (dict): A dictionary mapping content types to their respective formatter and colorizer functions.
+    Methods:
+        __init__(colorize: bool = True):
+            Initializes the Yeeter instance with optional colorization.
+        yeet(request_filepath):
+            Sends an HTTP request based on the provided file and processes the response.
+        _get_content_type(res: Response) -> str:
+            Extracts and returns the content type from the HTTP response.
+    """
+
     Visual = namedtuple("Visual", ["formatter", "colorizer"])
 
     def __init__(self, colorize: bool = True):
