@@ -1,8 +1,10 @@
 # Termino-logistic
 
-CLI tool using python to send requests to servers
+## About
 
-### How to use
+Termino-logistic is a powerful command-line interface (CLI) tool written in Python that allows users to send HTTP requests effortlessly. It is designed to streamline API interactions by supporting request configurations via YAML and JSON files. With Termino-logistic, users can execute various HTTP methods, manage request headers, send query parameters, and handle responses with ease. This tool is ideal for developers and testers who frequently interact with APIs and require a lightweight yet flexible solution.
+
+## How to Use
 
 Use the terminal first follow the steps and the `setup.py` file to build this project. Then run the tool by running `termino --help` in the terminal.
 
@@ -53,58 +55,180 @@ method: GET
 
 **By running the command** `termino -f myrequest.yml > book.pdf`.
 
-### A full example file `myrequest.yml`
+## How to Set Up the Project
 
-```yml
-method: XXX # (REQUIRED) GET, OPTIONS, HEAD, POST, PUT, PATCH, or DELETE
-url: XXX # (REQUIRED) must be prefixed with http:// or https://
+### Clone the Repository in Your Local Environment
 
-params: # url query parameters. have as many as you like
-  offset: 0
-  limit: 10
+Star and Fork the repository before cloning it into your local machine. Make sure you have Python `v3.12` installed with pip, also check that Git is installed.
 
-data: # data for POST
-  name: john
-  age: 22
-  hobbies:
-    - running
-    - eating
-    - sleeping
-
-data: # you can also type data in json format instead of yaml
-  {
-    "name": "ash",
-    "age": 10,
-    "hobbies": ["catching pokemons", "eating", "travelling"]
-  }
-
-headers: # have as many as you like
-  Content-Type: application/json
-  Authorization: <Bearer Token>
-
-
-cookies: # have as many as you like
-  mycookie: <Cookie Value>
-  myothercookie: <Other Cookie Value>
-
-timeout: 3.14 # seconds
-
-allow_redirects: true # true or false
-
-proxies: # have as many as you like
-  http: http://10.10.1.10:3128
-  https: https://10.10.1.11:1080
-  ftp: ftp://10.10.1.10:3128
-
-# EITHER verify server's TLS certificate. true or false
-verify: true
-# OR path to a CA bundle to use
-verify: some/folder/cacert.crt
-
-# EITHER path to single ssl client cert file (*.pem)
-cert: some/folder/client.pem
-# OR (*.cert), (*.key) pair.
-cert:
-  - some/folder/client.cert
-  - some/folder/client.key
+```sh
+# do replace the <username> with your actual username
+git clone https://github.com/<username>/termino-logistic.git
 ```
+
+### Setting Up the Environment
+
+For this step, you can use a Conda environment or a Python virtual environment.
+
+```sh
+# For Conda
+conda env create -f environment.yml
+conda env list
+conda activate termino-logistic
+```
+
+```sh
+# For Python Environment
+python -m venv .venv
+.venv\Scripts\Activate.ps1
+pip install -r requirements.txt
+```
+
+_Some extra Conda commands which can be helpful:_
+
+```sh
+conda env update --file environment.yml --prune
+conda env export --name termino-logistic > environment.yml
+conda env remove --name termino-logistic
+```
+
+_Use `pip freeze` to check if the dependencies are properly installed:_
+
+```py
+# list of libraries
+certifi==2025.1.31
+charset-normalizer==3.4.1
+docutils==0.21.2
+id==1.5.0
+idna==3.10
+jaraco.classes==3.4.0
+jaraco.context==6.0.1
+jaraco.functools==4.1.0
+keyring==25.6.0
+lxml==4.9.4
+markdown-it-py==3.0.0
+mdurl==0.1.2
+more-itertools==10.6.0
+nh3==0.2.21
+packaging==24.2
+Pygments==2.19.1
+pywin32-ctypes==0.2.3
+PyYAML==6.0.2
+readme_renderer==44.0
+requests==2.32.3
+requests-toolbelt==1.0.0
+rfc3986==2.0.0
+rich==13.9.4
+setuptools==75.8.2
+twine==6.1.0
+urllib3==2.3.0
+wheel==0.45.1
+```
+
+### Building and Uploading the Package
+
+To build the package, use the following commands:
+
+```sh
+python3 setup.py sdist bdist_wheel
+twine upload dist/*
+```
+
+#### Explanation:
+
+- `python3 setup.py sdist bdist_wheel` creates a source distribution (`sdist`) and a built distribution (`bdist_wheel`).
+- `twine upload dist/*` uploads the generated package files to PyPI for distribution.
+
+#### Understanding `setup.py`
+
+The `setup.py` file defines how the package is structured and how it should be installed. Here is the key breakdown:
+
+```py
+import pathlib
+from setuptools import setup
+
+# The directory containing this file
+HERE = pathlib.Path(__file__).parent
+README = (HERE / "README.md").read_text()
+
+with (HERE / "requirements.txt").open() as f:
+    requirements = f.read().splitlines()
+
+setup(
+    name="termino",
+    version="0.0.0",
+    description="cli tool using python to send request to a server",
+    long_description=README,
+    long_description_content_type="text/markdown",
+    url="https://github.com/debarshee2004/termino-logistic",
+    license="Apache",
+    entry_points={
+        "console_scripts": [
+            "termino = app.main:main",
+        ],
+    },
+    python_requires=">=3.12",
+    classifiers=[
+        "License :: Apache License",
+        "Programming Language :: Python :: 3",
+    ],
+    packages=["termino"],
+    include_package_data=True,
+    install_requires=requirements,
+)
+```
+
+- It reads dependencies from `requirements.txt`.
+- Defines metadata like package name, version, description, license, and URL.
+- Specifies the entry point (`termino = app.main:main`), allowing the tool to be run as a CLI command.
+- Ensures compatibility with Python 3.12 and later.
+
+---
+
+## How to Contribute to This Project
+
+We welcome contributions to Termino-logistic! Here are some ways you can help improve this project:
+
+### How You Can Improve the Project
+
+1. **Bug fixes**: Find and fix bugs in the existing codebase
+2. **Feature enhancements**: Add new features or enhance existing ones
+3. **Performance improvements**: Optimize code for better performance
+4. **Code refactoring**: Improve code structure and maintainability
+5. **Cross-platform compatibility**: Ensure the tool works well across different operating systems
+
+### How to Contribute by Writing Test Cases
+
+1. Add test cases for existing functionality in the `tests/` directory
+2. Ensure your test cases cover both expected behavior and edge cases
+3. Make sure tests are clear, well-documented, and follow the existing testing pattern
+4. Run the test suite before submitting your contribution to ensure nothing breaks
+
+### How to Contribute by Writing Docs
+
+1. Improve existing documentation for clarity and completeness
+2. Add documentation for new features or undocumented functionality
+3. Create tutorials or usage examples that showcase the tool's capabilities
+4. Fix typos, grammar issues, or formatting problems in existing documentation
+
+### Branch Naming Convention
+
+To maintain a structured and organized development process, follow these branch naming conventions:
+
+- **Feature Branches**: `feature/<short-description>` (e.g., `feature/add-logging`)
+- **Bug Fixes**: `fix/<short-description>` (e.g., `fix/request-timeout`)
+- **Documentation Updates**: `docs/<short-description>` (e.g., `docs/update-readme`)
+- **Hotfixes**: `hotfix/<short-description>` (e.g., `hotfix/security-patch`)
+- **Experimental**: `experiment/<short-description>` (e.g., `experiment/new-parser`)
+
+Always create branches from the `main` branch unless instructed otherwise. Ensure your branch name is descriptive and concise.
+
+---
+
+## Conclusion
+
+Termino-logistic is a flexible and efficient CLI tool for interacting with APIs using YAML and JSON configurations. Whether you're testing endpoints, automating API calls, or handling HTTP requests in bulk, this tool simplifies the process. We encourage contributions and feedback from the community to enhance and expand the functionality of Termino-logistic.
+
+## License
+
+This project is licensed under the Apache License. See the [LICENSE](./LICENSE) file for more details.
