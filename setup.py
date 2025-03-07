@@ -23,7 +23,7 @@ setup(
     license="Apache",
     entry_points={
         "console_scripts": [
-            "termino = app.__main__:main",
+            "termino = app.main:main",
         ],
     },
     python_requires=">=3.12",
