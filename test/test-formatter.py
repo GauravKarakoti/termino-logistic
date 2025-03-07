@@ -3,6 +3,15 @@ from app import formatter
 
 
 class TestFormatter(unittest.TestCase):
+    """
+    Unit tests for the formatter module.
+    This test suite includes the following tests:
+    - test_format_metadata: Tests the formatting of metadata strings.
+    - test_format_json_string: Tests the formatting of JSON strings with indentation.
+    - test_format_xml_string: Tests the formatting of XML strings with indentation.
+    - test_format_html_string: Tests the formatting of HTML strings with indentation.
+    """
+
     def test_format_metadata(self):
         metadata = '{"const1": "const2"}'
         formatted = formatter.format_metadata(metadata)

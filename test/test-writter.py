@@ -28,6 +28,24 @@ def fake_bytes_colorizer(content: bytes):
 
 
 class TestWriter(unittest.TestCase):
+    """
+    Unit tests for the writer module.
+    This test suite includes tests for writing text and bytes with various combinations
+    of formatters and colorizers.
+    Classes:
+        TestWriter: Contains unit tests for the writer module.
+    Methods:
+        setUp: Initializes a FakeWriteable instance for use in tests.
+        test_write_text_noformatter_nocolorizer: Tests writing text without a formatter or colorizer.
+        test_write_text_withformatter_nocolorizer: Tests writing text with a formatter but no colorizer.
+        test_write_text_noformatter_withcolorizer: Tests writing text with a colorizer but no formatter.
+        test_write_text_withformatter_withcolorizer: Tests writing text with both a formatter and a colorizer.
+        test_write_bytes_noformatter_nocolorizer: Tests writing bytes without a formatter or colorizer.
+        test_write_bytes_withformatter_nocolorizer: Tests writing bytes with a formatter but no colorizer.
+        test_write_bytes_noformatter_withcolorizer: Tests writing bytes with a colorizer but no formatter.
+        test_write_bytes_withformatter_withcolorizer: Tests writing bytes with both a formatter and a colorizer.
+    """
+
     def setUp(self) -> None:
         self.fake_writeable = FakeWriteable()
 
