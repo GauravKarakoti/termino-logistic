@@ -1,11 +1,11 @@
 import pathlib
-from setuptools import setup
+from setuptools import setup, find_packages
 
 # The directory containing this file
 HERE = pathlib.Path(__file__).parent
 README = (HERE / "README.md").read_text()
 
-with (HERE / "requirements.txt").open() as f:
+with open(HERE / "setupreq.txt", "r", encoding="utf-8") as f:
     requirements = f.read().splitlines()
 
 setup(
@@ -23,10 +23,10 @@ setup(
     },
     python_requires=">=3.12",
     classifiers=[
-        "License :: Apache License",
+        "License :: OSI Approved :: Apache Software License",
         "Programming Language :: Python :: 3",
     ],
-    packages=["termino"],
+    packages=find_packages(),
     include_package_data=True,
     install_requires=requirements,
 )
